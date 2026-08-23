@@ -1,0 +1,35 @@
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  flex: 0 0 260px;
+}
+
+.emoji {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  color: #2d1b0e;
+  font-size: 18px;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+p {
+  color: #8b6b4f;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.price {
+  color: #2d1b0e;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0e6dc;
+}

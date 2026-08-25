@@ -1,14 +1,24 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { Cocktail } from '../../services/coctail.service';
 
 @Component({
   selector: 'menu-card',
-  imports: [],
+  imports: [MatCardModule, MatButtonModule],
   templateUrl: './card.html',
   styleUrl: './card.scss',
 })
 export class MenuCard {
-  name = input<string>('Название коктейля');
-  ingredients = input<string>('Ингредиенты');
-  price = input<string>('₽');
-  emoji = input<string>('🍸');
+  cocktail = input.required<Cocktail>();
+  edit = output<Cocktail>();
+  delete = output<number>();
+
+  onEdit(): void {
+    this.edit.emit(this.cocktail());
+  }
+
+  onDelete(): void {
+    this.delete.emit(this.cocktail().id);
+  }
 }

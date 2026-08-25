@@ -1,6 +1,21 @@
-<div class="card">
-  <div class="emoji">{{ emoji() }}</div>
-  <h3>{{ name() }}</h3>
-  <p>{{ ingredients() }}</p>
-  <p class="price">{{ price() }}</p>
-</div>
+<mat-card class="card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="avatar">
+      @if (cocktail().image) {
+        <img [src]="cocktail().image"/>
+      } @else {
+        <img src="/cocktail.png" />
+      }
+    </div>
+    <mat-card-title>{{ cocktail().name }}</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <p>{{ cocktail().preparation }}</p>
+  </mat-card-content>
+  
+  <mat-card-actions>
+    <button matButton (click)="onEdit()">Изменить</button>
+    <button matButton (click)="onDelete()">Удалить</button>
+  </mat-card-actions>
+</mat-card>

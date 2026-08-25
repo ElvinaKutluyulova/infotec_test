@@ -1,9 +1,16 @@
 <div class="container">
   <h1 class="title">Барная карта</h1>
+  
+  <div class="actions">
+    <button matButton="filled" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon>
+      Добавить коктейль
+    </button>
+  </div>
 
   <div class="list">
-    @for (item of items; track item) {
-      <menu-card></menu-card>
+    @for (cocktail of cocktails; track cocktail.name) {
+      <menu-card [cocktail]="cocktail" />
     }
   </div>
 </div>

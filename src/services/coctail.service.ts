@@ -5,6 +5,7 @@ export interface Cocktail {
   name: string;
   preparation: string;
   image?: string;
+  updatedAt: string;
 }
 
 @Injectable({
@@ -13,7 +14,6 @@ export interface Cocktail {
 export class CocktailService {
   private storageKey = 'cocktails';
   private cocktails: Cocktail[] = [];
-  private nextId = 1;
 
   constructor() {
     this.loadFromStorage();
@@ -23,10 +23,8 @@ export class CocktailService {
     const data = localStorage.getItem(this.storageKey);
     if (data) {
       this.cocktails = JSON.parse(data);
-      this.nextId = this.cocktails.reduce((max, c) => Math.max(max, c.id), 0) + 1;
     } else {
       this.cocktails = [];
-      this.nextId = 1;
       this.saveToStorage();
     }
   }
@@ -39,26 +37,31 @@ export class CocktailService {
     return [...this.cocktails];
   }
 
-  addCocktail(cocktail: Omit<Cocktail, 'id'>): Cocktail {
+  addCocktail(name: string, preparation: string, image?: string): Cocktail {
     const newCocktail = {
-      ...cocktail,
-      id: this.nextId++
+      id: this.cocktails.length + 1,
+      name: name,
+      preparation: preparation,
+      image: image || '',
+      updatedAt: new Date().toISOString()
     };
     this.cocktails.push(newCocktail);
     this.saveToStorage();
     return newCocktail;
   }
 
-  updateCocktail(id: number, data: Partial<Omit<Cocktail, 'id'>>): Cocktail | undefined {
-    const index = this.cocktails.findIndex(c => c.id === id);
-    if (index === -1) return undefined;
-    
-    this.cocktails[index] = {
-      ...this.cocktails[index],
-      ...data
-    };
-    this.saveToStorage();
-    return this.cocktails[index];
+  updateCocktail(id: number, name: string, preparation: string, image?: string): Cocktail | undefined {
+    for (let i = 0; i < this.cocktails.length; i++) {
+      if (this.cocktails[i].id === id) {
+        this.cocktails[i].name = name;
+        this.cocktails[i].preparation = preparation;
+        this.cocktails[i].image = image || '';
+        this.cocktails[i].updatedAt = new Date().toISOString();
+        this.saveToStorage();
+        return this.cocktails[i];
+      }
+    }
+    return undefined;
   }
 
   deleteCocktail(id: number): boolean {

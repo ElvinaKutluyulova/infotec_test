@@ -12,6 +12,7 @@
   
   <mat-card-content>
     <p>{{ cocktail().preparation }}</p>
+    <p>Дата: {{ cocktail().updatedAt | date:'dd.MM.yyyy HH:mm' }}</p>
   </mat-card-content>
   
   <mat-card-actions>

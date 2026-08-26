@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>{{ isEdit() ? 'Редактировать коктейль' : 'Добавить коктейль' }}</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Название коктейля</mat-label>
+    <input matInput [(ngModel)]="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Способ приготовления</mat-label>
+    <textarea matInput [(ngModel)]="preparation" rows="3"></textarea>
+  </mat-form-field>
+
+  <div class="file-upload">
+    <input 
+      type="file" 
+      (change)="onFileSelected($event)" 
+      accept="image/*"
+      #fileInput
+    />
+    <button mat-raised-button type="button" (click)="fileInput.click()">
+      <mat-icon>upload</mat-icon>
+      {{ imagePreview() ? 'Заменить' : 'Выбрать картинку' }}
+    </button>
+    
+    @if (imagePreview()) {
+      <div class="preview">
+        <img [src]="imagePreview()" />
+        <button mat-icon-button type="button" (click)="removeImage()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    }
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button matButton mat-dialog-close>Отмена</button>
+  <button matButton (click)="onSave()" [disabled]="!name().trim() || !preparation().trim()">
+    {{ isEdit() ? 'Сохранить' : 'Добавить' }}
+  </button>
+</mat-dialog-actions>

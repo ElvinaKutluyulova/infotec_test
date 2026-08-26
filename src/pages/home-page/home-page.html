@@ -9,8 +9,14 @@
   </div>
 
   <div class="list">
-    @for (cocktail of cocktails; track cocktail.name) {
-      <menu-card [cocktail]="cocktail" />
+    @for (cocktail of cocktails(); track cocktail.id) {
+      <menu-card 
+        [cocktail]="cocktail"
+        (edit)="editCocktail($event)"
+        (delete)="deleteCocktail($event)"
+      />
+    } @empty {
+      <p class="empty">Нет коктейлей, добавьте первый</p>
     }
   </div>
 </div>

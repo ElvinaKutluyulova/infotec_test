@@ -2,10 +2,11 @@ import { Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Cocktail } from '../../services/coctail.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'menu-card',
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule],
   templateUrl: './card.html',
   styleUrl: './card.scss',
 })

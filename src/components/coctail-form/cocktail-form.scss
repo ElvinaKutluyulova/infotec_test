@@ -1,0 +1,39 @@
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.file-upload {
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .preview {
+    position: relative;
+    display: inline-block;
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    button {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+  }
+}
